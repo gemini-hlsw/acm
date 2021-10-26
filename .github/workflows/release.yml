@@ -11,6 +11,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: olafurpg/setup-scala@v13
+        with:
+          java-version: 1.8
       - uses: olafurpg/setup-gpg@v3
       - name: Publish
         run: sbt ci-release

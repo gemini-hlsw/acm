@@ -12,16 +12,6 @@ ThisBuild / resolvers += "Gemini Repository".at(
   "https://github.com/gemini-hlsw/maven-repo/raw/master/releases"
 )
 
-val JAXB = Seq("javax.xml.bind" % "jaxb-api" % jaxbVersion,
-               "org.glassfish.jaxb" % "jaxb-runtime" % jaxbVersion
-)
-
-val MUnit =
-  Seq(
-    "org.scalameta" %% "munit" % munitVersion % Test
-    // "org.typelevel" %%% "munit-cats-effect" % LibraryVersions.munitCatsEffectVersion % Test,
-    // "org.typelevel" %%% "discipline-munit"  % LibraryVersions.munitDisciplineVersion % Test
-  )
 inThisBuild(
   Seq(
     homepage                      := Some(url("https://github.com/gemini-hlsw/acm")),
@@ -29,12 +19,10 @@ inThisBuild(
   ) ++ lucumaPublishSettings
 )
 
-publish / skip := true
-
 lazy val acm = project
   .in(file("."))
   .settings(
-    name         := ".",
+    name         := "acm",
     libraryDependencies ++= Seq(
       "ch.qos.logback"     % "logback-core"         % logbackVersion,
       "edu.gemini.epics"   % "epics-service"        % epicsServiceVersion,
@@ -48,6 +36,7 @@ lazy val acm = project
     ),
     testFrameworks += new TestFramework("munit.Framework"),
     javacOptions += "-Xlint:unchecked",
+    Compile / doc / sources := Seq(),
     compileOrder := CompileOrder.JavaThenScala,
     Compile / sourceGenerators += Def.task {
       import scala.sys.process._
@@ -70,3 +59,4 @@ lazy val acm = project
     }.taskValue
   )
   .configure(_.enablePlugins(AutomateHeaderPlugin))
+
