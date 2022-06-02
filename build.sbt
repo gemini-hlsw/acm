@@ -22,7 +22,7 @@ inThisBuild(
 lazy val acm = project
   .in(file("."))
   .settings(
-    name         := "acm",
+    name                    := "acm",
     libraryDependencies ++= Seq(
       "ch.qos.logback"     % "logback-core"         % logbackVersion,
       "edu.gemini.epics"   % "epics-service"        % epicsServiceVersion,
@@ -37,7 +37,7 @@ lazy val acm = project
     testFrameworks += new TestFramework("munit.Framework"),
     javacOptions += "-Xlint:unchecked",
     Compile / doc / sources := Seq(),
-    compileOrder := CompileOrder.JavaThenScala,
+    compileOrder            := CompileOrder.JavaThenScala,
     Compile / sourceGenerators += Def.task {
       import scala.sys.process._
       val pkg = "edu.gemini.epics.acm.generated"
@@ -59,4 +59,3 @@ lazy val acm = project
     }.taskValue
   )
   .configure(_.enablePlugins(AutomateHeaderPlugin))
-
